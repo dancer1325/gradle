@@ -97,5 +97,8 @@ TODO:
       * local
         * **Note:** 👁️if there are both caches → local is firstly checked👁️
       * remote
+        * ways
+          * [Docker image](https://hub.docker.com/r/gradle/build-cache-node)
+          * [Develocity](https://gradle.com/gradle-enterprise-solutions/build-cache/)
 
 TODO:
