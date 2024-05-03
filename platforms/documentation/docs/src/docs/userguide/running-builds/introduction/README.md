@@ -41,4 +41,21 @@ TODO:
       * compile a code
       * run a test
 
+* Plugin
+  * Gradle
+    * == dependencyResolutionEngine + plugins
+  * := software / provides additional functionality to the Gradle build system
+    * *Example of additional functionalities*
+      * new tasks
+      * new configurations
+      * …
+  * uses
+    * organize build logic
+    * distribute custom tasks — as — packaged code
+      * ways to distribute them
+        * Core Plugins  -- Check '../reference'
+        * [Gradle Plugin Portal](https://plugins.gradle.org/) — Community Plugins —
+        * Custom Plugins — via — https://docs.gradle.org/current/dsl/org.gradle.api.tasks.javadoc.Javadoc.html
+        * Convention Plugins  -- Check '../AuthorinPlugins' --
+
 TODO:
