@@ -40,6 +40,16 @@ TODO:
     * *Example:*
       * compile a code
       * run a test
+  * task’s states
+    * got it after running a task
+    * `UP-TO-DATE`
+      * == already executed & NOT changed  -- check incremental building --
+    * `SKIPPED`
+      * == explicitly prevented from running
+    * `FROM-CACHE`
+      * == copied from building cache
+    * `NO-SOURCE`
+      * == NOT executed because required inputs NOT available
 
 * Plugin
   * Gradle
