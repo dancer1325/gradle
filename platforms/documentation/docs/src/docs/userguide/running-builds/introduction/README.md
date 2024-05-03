@@ -85,6 +85,7 @@ TODO:
   * build caching
     * how does it work?
       * store previous built results
+        * Note: 👁️If the files are NOT used from a long time → Gradle removes it 👁️
     * uses
       * share across teams
       * speed up builds
@@ -92,5 +93,9 @@ TODO:
         * CI
     * `FROM-CACHE`
       * task state /  skipped to run by build caching
+    * types of cache
+      * local
+        * **Note:** 👁️if there are both caches → local is firstly checked👁️
+      * remote
 
 TODO:
