@@ -58,4 +58,29 @@ TODO:
         * Custom Plugins — via — https://docs.gradle.org/current/dsl/org.gradle.api.tasks.javadoc.Javadoc.html
         * Convention Plugins  -- Check '../AuthorinPlugins' --
 
+* Incremental builds & build caching
+  * allows
+    * := build / if inputs of the previous build have NOT changed → 👁️ skip running tasks 👁️
+      * requirements
+        * tasks must define
+          * inputs
+          * outputs
+  * ways to display task state
+    * `… --console=verbose`
+    * `org.gradle.console=verbose` in ‘gradle.properties’
+  * incremental build
+    * ⚠️if you switch to other branches → it does NOT recognize it → use build caching⚠️
+    * `UP-TO-DATE`
+      * task state /  skiped to run by incremental build
+  * build caching
+    * how does it work?
+      * store previous built results
+    * uses
+      * share across teams
+      * speed up builds
+        * local
+        * CI
+    * `FROM-CACHE`
+      * task state /  skipped to run by build caching
+
 TODO:
