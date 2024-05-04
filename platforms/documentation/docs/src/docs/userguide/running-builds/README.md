@@ -1,0 +1,3 @@
+- Goal
+    - gradle basics
+    - how to use

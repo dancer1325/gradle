@@ -1,0 +1,2 @@
+- Goal
+    - Gradle with Java projects

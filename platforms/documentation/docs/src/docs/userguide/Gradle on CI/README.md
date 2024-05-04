@@ -1,0 +1,2 @@
+- Goal
+    - -- integration with -- CI servers
