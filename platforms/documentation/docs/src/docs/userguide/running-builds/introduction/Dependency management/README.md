@@ -1,0 +1,42 @@
+- Dependency Management
+    - := automated technique about external resources / required by a project to be
+        - declared &
+        - resolved
+    - built-in by Gradle
+    - dependencies refer to
+        - JARs
+        - plugins
+        - libraries
+
+- `libs.versions.toml`
+    - := version catalog / centralize your dependency declaration
+        - allows
+            - → make easier between subprojects, share
+                - dependencies
+                - version configurations
+            - getting autocompletions by the IDE
+        - placed under ‘/gradle’
+    - sections
+        - `[versions]`
+            - versions of
+                - libraries &
+                - plugins
+        - `[libraries]`
+        - `[bundles]`
+            - == define set of dependencies
+        - `[plugins]`
+
+- Dependency’s configuration
+    - `implementation`
+        - allows
+            - about production code
+                - running
+                - compiling
+    - `testImplementation`
+        - allows
+            - about test code
+                - running
+                - compiling
+
+- `/gradlew :app:dependencies`
+    - check app’s dependencies
