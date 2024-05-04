@@ -1,0 +1,4 @@
+- := metadata of your build run
+- `./gradlew build --scan`
+    - `--scan` enable it
+- [Build Scan](https://scans.gradle.com/)
