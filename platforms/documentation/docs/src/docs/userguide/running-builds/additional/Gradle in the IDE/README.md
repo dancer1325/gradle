@@ -1,0 +1,5 @@
+- Jetbrains
+    - fully-functional integration
+    - https://www.jetbrains.com/help/idea/gradle.html
+    - https://developer.android.com/build
+- TODO:
