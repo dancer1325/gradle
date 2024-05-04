@@ -1,0 +1,31 @@
+- := basic unit of work of a project
+    - defined inside a
+        - build script OR
+        - plugin
+    - exist built-in tasks
+        - `Copy`
+        - `Delete`
+        - `Exec`
+        - `Zip`
+    - run via
+        - Gradle Wrapper -- Check '../GradleWrapper'
+        - CLI  -- Check '../CLI'
+    - *Example:*
+        - compile a code
+        - copy & move files
+        - run a test
+        - create .JAR files
+        - generate Javadoc
+        - publish artifacts to repositories
+        - …
+
+- task’s states
+    - got it after running a task
+    - `UP-TO-DATE`
+        - == already executed & NOT changed due to incremental build -- Check '../IncrementalBuildAndCaching' --
+    - `SKIPPED`
+        - == explicitly prevented from running
+    - `FROM-CACHE`
+        - == copied from building cache -- Check '../IncrementalBuildAndCaching' --
+    - `NO-SOURCE`
+        - == NOT executed because required inputs NOT available
