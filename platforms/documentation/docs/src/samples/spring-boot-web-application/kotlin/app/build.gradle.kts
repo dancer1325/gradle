@@ -5,9 +5,10 @@ plugins {
 
 version = "1.0.2"
 group = "org.gradle.samples"
+//mainClass = "HelloWorld"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
 }
 
 repositories {
