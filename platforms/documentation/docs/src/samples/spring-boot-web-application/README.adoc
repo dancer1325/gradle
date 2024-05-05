@@ -13,6 +13,8 @@
         *** Problems:
             **** Problem1: "nested exception is java.lang.IllegalStateException: Could not evaluate condition on org.springframework.boot.autoconfigure.r2dbc"
                 ***** Solution: TODO:
+            **** Problem2: "Could not read workspace metadata from /XXX/.gradle/caches/8.7/kotlin-dsl/XX/metadata.bin > /XX/.gradle/caches/8.7/XX/metadata.bin (No such file or directory)
+                ***** Solution: `rm -rf ~/.gradle`
 
 
 ## Notes
