@@ -1,14 +1,21 @@
 plugins {
-    id("org.springframework.boot") version("2.7.8")
+    id("org.springframework.boot") version("3.2.5")
+    id("io.spring.dependency-management") version("1.1.4")
     java
 }
 
 version = "1.0.2"
 group = "org.gradle.samples"
-//mainClass = "HelloWorld"
+//mainClass = "SpringBootWebApplication"
+sourceCompatibility = '17'
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+}
+
+compileOptions {
+    sourceCompatibility 17
+    targetCompatibility 17
 }
 
 repositories {
@@ -16,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("org.springframework.boot:spring-boot-dependencies:2.7.8"))
+    //implementation(platform("org.springframework.boot:spring-boot-dependencies:2.7.8"))
 
     implementation("org.springframework.boot:spring-boot-starter")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
