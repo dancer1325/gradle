@@ -20,3 +20,4 @@
 
 ## Notes
 * Check https://github.com/dancer1325/spring-guides-gradle
+* Check https://github.com/dancer1325/spring-guides-spring-boot
