@@ -6,30 +6,16 @@ plugins {
 
 version = "1.0.2"
 group = "org.gradle.samples"
-//mainClass = "SpringBootWebApplication"
-sourceCompatibility = '17'
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-}
-
-compileOptions {
-    sourceCompatibility 17
-    targetCompatibility 17
-}
+//mainClassName = "com.springboot.SpringBootWebApplication"
+//mainClass = "com.springboot.SpringBootWebApplication"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    //implementation(platform("org.springframework.boot:spring-boot-dependencies:2.7.8"))
-
-    implementation("org.springframework.boot:spring-boot-starter")
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude(mapOf("group" to "org.junit.vintage", "module" to "junit-vintage-engine"))
-    }
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.named<Test>("test") {
