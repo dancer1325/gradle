@@ -17,54 +17,72 @@
 [[java_testing]]
 = Testing in Java & JVM projects
 
-Testing on the JVM is a rich subject matter. There are many different testing libraries and frameworks, as well as many different types of test. All need to be part of the build, whether they are executed frequently or infrequently. This chapter is dedicated to explaining how Gradle handles differing requirements between and within builds, with significant coverage of how it integrates with the two most common testing frameworks: https://junit.org/[JUnit] and https://testng.org/[TestNG].
-
-It explains:
-
- * Ways to control how the tests are run (<<#sec:test_execution,Test execution>>)
- * How to select specific tests to run (<<#test_filtering,Test filtering>>)
- * What test reports are generated and how to influence the process (<<#test_reporting,Test reporting>>)
- * How Gradle finds tests to run (<<#sec:test_detection,Test detection>>)
- * How to make use of the major frameworks' mechanisms for grouping tests together (<<#test_grouping,Test grouping>>)
-
-But first, let's look at the basics of JVM testing in Gradle.
-
-NOTE: A new configuration DSL for modeling test execution phases is available via the incubating <<jvm_test_suite_plugin.adoc#jvm_test_suite_plugin,JVM Test Suite>> plugin.
+* There are many different testing libraries & frameworks & types of test
+    ** ALL need to be part of the build
+* goal
+    ** Gradle handles differing requirements between and within builds /
+        *** significant coverage -- with the -- 2 most common testing frameworks
+            **** https://junit.org/[JUnit]
+            **** https://testng.org/[TestNG]
+        *** different ways to control how the tests are run (<<#sec:test_execution,Test execution>>)
+        *** how to select specific tests to run (<<#test_filtering,Test filtering>>)
+        *** What test reports are generated & how to influence the process (<<#test_reporting,Test reporting>>)
+        *** how to find tests to run (<<#sec:test_detection,Test detection>>)
+        *** grouping tests together -- via -- major frameworks' mechanisms  (<<#test_grouping,Test grouping>>)
+* new configuration DSL / model test execution phases -- via the -- incubating <<jvm_test_suite_plugin.adoc#jvm_test_suite_plugin,JVM Test Suite>> plugin
 
 [[sec:java_testing_basics]]
 == The basics
 
-All JVM testing revolves around a single task type: link:{groovyDslPath}/org.gradle.api.tasks.testing.Test.html[Test]. This runs a collection of test cases using any supported test library — JUnit, JUnit Platform or TestNG — and collates the results. You can then turn those results into a report via an instance of the link:{groovyDslPath}/org.gradle.api.tasks.testing.TestReport.html[TestReport] task type.
+* 👁️ ALL JVM testing -- revolves around -- 1 task type: link:{groovyDslPath}/org.gradle.api.tasks.testing.Test.html[Test] 👁️
+    ** requirements to operate it
+        *** link:{groovyDslPath}/org.gradle.api.tasks.testing.Test.html#org.gradle.api.tasks.testing.Test:testClassesDirs[Test.getTestClassesDirs()]
+            **** == where to find the compiled test classes
+        *** link:{groovyDslPath}/org.gradle.api.tasks.testing.Test.html#org.gradle.api.tasks.testing.Test:classpath[Test.getClasspath()]
+            **** == execution classpath / classes under test + test library to use
+    ** runs a collection of test cases -- via -- ANY supported test library (JUnit, JUnit Platform or TestNG)
+    ** collates the results
+    ** those results can -- via an instance of the link:{groovyDslPath}/org.gradle.api.tasks.testing.TestReport.html[TestReport] task type, turn into --  a report
+* if you're using a JVM language plugin (_Example:_ <<java_plugin.adoc#java_plugin,Java Plugin>>)
+    ** -> automatically, you get
+        *** dedicated `test` source set / unit tests
+            **** -- automatically creates -- <<java_plugin.adoc#java_source_set_configurations,corresponding dependency configurations>>
+                ***** _Example:_ `testImplementation` & `testRuntimeOnly`
+        *** `test` task of type `Test` / runs those unit tests
+            **** configured by the previous source set
+                ***** with
+                    ****** appropriate execution classpath
+                    ****** directory / contain the compiled test classes
+                ***** attaching it to the `check` <<organizing_tasks.adoc#sec:lifecycle_tasks,lifecycle task>>
+    ** required steps to do
+        *** configure compilation and runtime dependencies
+        *** add ANY necessary configuration | `test` task
 
-In order to operate, the `Test` task type requires just two pieces of information:
-
- * Where to find the compiled test classes (property: link:{groovyDslPath}/org.gradle.api.tasks.testing.Test.html#org.gradle.api.tasks.testing.Test:testClassesDirs[Test.getTestClassesDirs()])
- * The execution classpath, which should include the classes under test as well as the test library that you're using (property: link:{groovyDslPath}/org.gradle.api.tasks.testing.Test.html#org.gradle.api.tasks.testing.Test:classpath[Test.getClasspath()])
-
-When you're using a JVM language plugin — such as the <<java_plugin.adoc#java_plugin,Java Plugin>> — you will automatically get the following:
-
- * A dedicated `test` source set for unit tests
- * A `test` task of type `Test` that runs those unit tests
-
-The JVM language plugins use the source set to configure the task with the appropriate execution classpath and the directory containing the compiled test classes. In addition, they attach the `test` task to the `check` <<organizing_tasks.adoc#sec:lifecycle_tasks,lifecycle task>>.
-
-It's also worth bearing in mind that the `test` source set automatically creates <<java_plugin.adoc#java_source_set_configurations,corresponding dependency configurations>> — of which the most useful are `testImplementation` and `testRuntimeOnly` — that the plugins tie into the `test` task's classpath.
-
-All you need to do in most cases is configure the appropriate compilation and runtime dependencies and add any necessary configuration to the `test` task. The following example shows a simple setup that uses JUnit Platform and changes the maximum heap size for the tests' JVM to 1 gigabyte:
-
-.A basic configuration for the 'test' task
+.JUnit Platform & maximum heap size for the tests' JVM is 1 GB
 ====
 include::sample[dir="snippets/java/basic/kotlin",files="build.gradle.kts[tags=java-basic-test-config]"]
 include::sample[dir="snippets/java/basic/groovy",files="build.gradle[tags=java-basic-test-config]"]
 ====
 
-The link:{groovyDslPath}/org.gradle.api.tasks.testing.Test.html[Test] task has many generic configuration options as well as several framework-specific ones that you can find described in link:{javadocPath}/org/gradle/api/tasks/testing/junit/JUnitOptions.html[JUnitOptions], link:{javadocPath}/org/gradle/api/tasks/testing/junitplatform/JUnitPlatformOptions.html[JUnitPlatformOptions] and link:{javadocPath}/org/gradle/api/tasks/testing/testng/TestNGOptions.html[TestNGOptions]. We cover a significant number of them in the rest of the chapter.
+* link:{groovyDslPath}/org.gradle.api.tasks.testing.Test.html[Test] task has many
+    ** generic configuration options
+    ** framework-specific configuration
+        *** link:{javadocPath}/org/gradle/api/tasks/testing/junit/JUnitOptions.html[JUnitOptions],
+        *** link:{javadocPath}/org/gradle/api/tasks/testing/junitplatform/JUnitPlatformOptions.html[JUnitPlatformOptions]
+        *** link:{javadocPath}/org/gradle/api/tasks/testing/testng/TestNGOptions.html[TestNGOptions]
 
-If you want to set up your own `Test` task with its own set of test classes, then the easiest approach is to create your own source set and `Test` task instance, as shown in <<#sec:configuring_java_integration_tests,Configuring integration tests>>.
+
+* if you want to set up your own `Test` task / own set of test classes ->
+    ** create your own
+        *** source set
+        *** `Test` task instance
+    ** Check <<#sec:configuring_java_integration_tests,Configuring integration tests>>
+
 
 [[sec:test_execution]]
 == Test execution
 
+* TODO:
 Gradle executes tests in a separate ('forked') JVM, isolated from the main build process. This prevents classpath pollution and excessive memory consumption for the build process. It also allows you to run the tests with different JVM arguments than the build is using.
 
 You can control how the test process is launched via several properties on the `Test` task, including the following:
