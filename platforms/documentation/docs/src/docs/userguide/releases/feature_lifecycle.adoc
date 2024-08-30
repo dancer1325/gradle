@@ -15,24 +15,23 @@
 [[feature_lifecycle]]
 = The Feature Lifecycle
 
-Gradle is under constant development. New versions are delivered on a regular and frequent basis (approximately every six weeks) as described in <<#eol_support,the section on end-of-life support>>.
-
-Continuous improvement combined with frequent delivery allows new features to be available to users early.
-Early users provide invaluable feedback, which is incorporated into the development process.
-
-Getting new functionality into the hands of users regularly is a core value of the Gradle platform.
-
-At the same time, API and feature stability are taken very seriously and considered a core value of the Gradle platform.
-Design choices and automated testing are engineered into the development process and formalized by <<#backwards_compatibility,the section on backward compatibility>>.
-
-The Gradle _feature lifecycle_ has been designed to meet these goals. It also communicates to users of Gradle what the state of a feature is.
-The term _feature_ typically means an API or DSL method or property in this context, but it is not restricted to this definition.
-Command line arguments and modes of execution (e.g. the Build Daemon) are two examples of other features.
+* Gradle -- is under -- constant development
+    ** new versions / (approximately) six weeks
+        *** check <<#eol_support,the section on end-of-life support>>
+    ** early users -- test -- beta versions
+* main ideas
+    ** stability of
+        *** API
+        *** features
+* development process
+    ** design choices
+    ** automated testing
+    ** check <<#backwards_compatibility,backward compatibility>>
+* _feature_
+    ** == API or DSL method or property or CL's arguments or modes of execution
 
 [[sec:states]]
 == Feature States
-
-Features can be in one of four states:
 
 1. <<#sec:internal,Internal>>
 2. <<#sec:incubating_state,Incubating>>
@@ -42,16 +41,26 @@ Features can be in one of four states:
 [[sec:internal]]
 == 1. Internal
 
-_Internal_ features are not designed for public use and are only intended to be used by Gradle itself. They can change in any way at any point in time without any notice.
-Therefore, we recommend avoiding the use of such features.
-_Internal_ features are not documented.
-If it appears in this User Manual, the DSL Reference, or the API Reference, then the feature is not _internal_.
-
-_Internal_ features may evolve into public features.
+* use
+    ** NOT for public
+    ** Gradle itself
+* can change
+    ** in any way
+    ** | any point in time
+    ** without ANY notice
+* recommendations
+    ** NOT use them
+* NOT documented
+    ** neither |
+        *** this User Manual
+        *** DSL Reference
+        *** API Reference
+* -- may evolve into -- public features
 
 [[sec:incubating_state]]
 == 2. Incubating
 
+* TODO
 Features are introduced in the _incubating_ state to allow real-world feedback to be incorporated into the feature before making it public.
 It also gives users willing to test potential future changes early access.
 
