@@ -15,7 +15,10 @@
 [[gradle]]
 = Gradle Basics
 
-Gradle *automates building, testing, and deployment of software* from information in *build scripts*.
+* == *build scripts* / allows automating
+    ** building,
+    ** testing,
+    ** deployment of software
 
 image::gradle-basic-1.png[]
 
@@ -23,41 +26,39 @@ image::gradle-basic-1.png[]
 
 === Projects
 
-A Gradle *project* is a piece of software that can be built, such as an application or a library.
-
-*Single project* builds include a single project called the *root project*.
-
-*Multi-project* builds include *one root project* and *any number of subprojects*.
+* := software / can be built as
+    ** application OR
+    ** library
+* *Single project* builds
+    ** == 1! *root project*
+* *Multi-project* builds
+    ** == 1! *root project* + >= 1 subprojects
 
 === Build Scripts
 
-*Build scripts* detail to Gradle what steps to take to build the project.
-
-Each project can include one or more build scripts.
+* == steps / build the project
+* ≥ 1 / project
 
 === Dependency Management
 
-*Dependency management* is an automated technique for declaring and resolving external resources required by a project.
-
-Each project typically includes a number of external dependencies that Gradle will resolve during the build.
+* := automated technique / allows about external required resources | project
+    ** declare
+    ** resolve
+        *** -- normally, during the -- build
 
 === Tasks
 
-*Tasks are a basic unit of work* such as compiling code or running your test.
-
-Each project contains one or more tasks defined inside a build script or a plugin.
+* := basic unit of work / defined | build script or plugin
+    ** _Example:_ compile code, run test
+    ** >= 1 / project
 
 === Plugins
 
-Plugins are used to *extend Gradle's capability* and optionally contribute *tasks* to a project.
+* allows
+    ** extending Gradle's capability
+    ** contributing project's tasks
 
 == Gradle project structure
-
-Many developers will interact with Gradle for the first time through an existing project.
-
-The presence of the `gradlew` and `gradlew.bat` files in the root directory of a project is a clear indicator that Gradle is used.
-
-A Gradle project will look similar to the following:
 
 [source,text]
 ----
@@ -77,39 +78,45 @@ project
     ├── build.gradle(.kts)              // <5>
     └── src                             // <6>
 ----
-<1> Gradle directory to store wrapper files and more
+<1> Gradle directory / store wrapper files + <2>
 <2> Gradle version catalog for dependency management
 <3> Gradle wrapper scripts
-<4> Gradle settings file to define a root project name and subprojects
-<5> Gradle build scripts of the two subprojects - `subproject-a` and `subproject-b`
+<4> Gradle settings file / define root project + subprojects
+<5> Gradle build scripts of subprojects
 <6> Source code and/or additional files for the projects
+
+* presence of `gradlew` and `gradlew.bat` | root directory of a project -> indicator that Gradle is used
 
 == Invoking Gradle
 
 === IDE
 
-Gradle is <<gradle_ides.adoc#gradle_ides,built-in to many IDEs>> including Android Studio, IntelliJ IDEA, Visual Studio Code, Eclipse, and NetBeans.
-
-Gradle can be automatically invoked when you build, clean, or run your app in the IDE.
-
-It is recommended that you consult the manual for the IDE of your choice to learn more about how Gradle can be used and configured.
+* <<gradle_ides.adoc#gradle_ides,built-in to many IDEs>>
+    ** Android Studio,
+    ** IntelliJ IDEA,
+    ** Visual Studio Code,
+    ** Eclipse,
+    ** NetBeans
+* if you build, clean, OR run your app | IDE-> Gradle can be automatically invoked
+* check manual / IDE
 
 === Command line
 
-Gradle can be invoked in the command line once <<installation.adoc#installation, installed>>.
-For example:
+* requirements
+    ** <<installation.adoc#installation, installed>>
+* _Example:_
 
 [source,text]
 ----
 $ gradle build
 ----
 
-NOTE: Most projects do not use the installed version of Gradle.
-
 === Gradle Wrapper
 
-The Wrapper is a script that invokes a declared version of Gradle and is *the recommended way to execute a Gradle build*.
-It is found in the project root directory as a `gradlew` or `gradlew.bat` file:
+* := script (`gradlew` or `gradlew.bat`) /
+    ** -- invokes a -- declared version of Gradle
+    ** | root directory
+* *recommended way to execute a Gradle build*
 
 [source,text]
 ----
