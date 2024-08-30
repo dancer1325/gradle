@@ -15,28 +15,26 @@
 [[settings_file_basics]]
 = Settings File Basics
 
-The settings file is the *entry point* of every Gradle project.
+* "settings.gradle"
+    ** == entry point of every Gradle project /
+        *** required location | root directory
+    ** goal
+        *** add subprojects | your build
+        *** | Single Project builds → optional
+        *** | Multi Project builds → mandatory / declare ALL subprojects
 
 image::gradle-basic-3.png[]
-
-The primary purpose of the _settings file_ is to add subprojects to your build.
-
-Gradle supports single and multi-project builds.
-
-- For single-project builds, the settings file is optional.
-- For multi-project builds, the settings file is mandatory and declares all subprojects.
 
 [[sec:settings_file_script]]
 == Settings script
 
-The settings file is a script.
-It is either a `settings.gradle` file written in Groovy or a `settings.gradle.kts` file in Kotlin.
-
-The link:{groovyDslPath}/index.html[Groovy DSL^] and the link:{kotlinDslPath}/index.html[Kotlin DSL^] are the only accepted languages for Gradle scripts.
-
-The settings file is typically found in the root directory of the project.
-
-Let's take a look at an example and break it down:
+* == script
+    ** allowed languages
+        *** Groovy -- `settings.gradle`  --
+            **** Check link:{groovyDslPath}/index.html[Groovy DSL^]
+        *** Kotlin -- `settings.gradle.kts` --
+            **** Check link:{kotlinDslPath}/index.html[Kotlin DSL^]
+* _Example:_
 
 ====
 [.multi-language-sample]
@@ -44,14 +42,12 @@ Let's take a look at an example and break it down:
 .settings.gradle.kts
 [source,kotlin]
 ----
-rootProject.name = "root-project"   // <1>
+rootProject.name = "root-project"   // <1> Define the project name
 
-include("sub-project-a")            // <2>
+include("sub-project-a")            // <2> Add subprojects
 include("sub-project-b")
 include("sub-project-c")
 ----
-<1> Define the project name.
-<2> Add subprojects.
 =====
 
 [.multi-language-sample]
@@ -59,31 +55,27 @@ include("sub-project-c")
 .settings.gradle
 [source,groovy]
 ----
-rootProject.name = 'root-project'   // <1>
+rootProject.name = 'root-project'   // <1> Define the project name
 
-include('sub-project-a')            // <2>
+include('sub-project-a')            // <2> Add subprojects
 include('sub-project-b')
 include('sub-project-c')
 ----
-<1> Define the project name.
-<2> Add subprojects.
 =====
 ====
 
 === 1. Define the project name
 
-The settings file defines your project name:
+* 1! root project / build
 
 [source,kotlin]
 ----
 rootProject.name = "root-project"
 ----
 
-There is only one root project per build.
-
 === 2. Add subprojects
 
-The settings file defines the structure of the project by including subprojects, if there are any:
+* -> define the structure of the project
 
 [source,kotlin]
 ----
@@ -92,7 +84,7 @@ include("business-logic")
 include("data-model")
 ----
 
-Consult the <<writing_settings_files.adoc#writing_settings_files,Writing Settings File>> page to learn more.
+* Check <<writing_settings_files.adoc#writing_settings_files,Writing Settings File>>
 
 [.text-right]
 **Next Step:** <<build_file_basics.adoc#build_file_basics,Learn about the Build scripts>> >>
