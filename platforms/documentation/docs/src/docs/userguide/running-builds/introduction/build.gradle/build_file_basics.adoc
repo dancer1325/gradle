@@ -15,25 +15,22 @@
 [[build_file_basics]]
 = Build File Basics
 
-Generally, a build script details *build configuration, tasks, and plugins*.
-
 image::gradle-basic-4.png[]
 
-Every Gradle build comprises at least one _build script_.
-
-In the build file, two types of dependencies can be added:
-
-1. The libraries and/or plugins on which Gradle and the build script depend.
-2. The libraries on which the project sources (i.e., source code) depend.
+* >=1 _build script_ / Gradle build
+* types of dependencies / can be added
+    ** libraries and/or plugins / Gradle & build script -- depends on
+    ** libraries / project sources (i.e., source code) -- depends on
 
 [[sec:build_script]]
 == Build scripts
 
-The build script is either a `build.gradle` file written in Groovy or a `build.gradle.kts` file in Kotlin.
-
-The link:{groovyDslPath}/index.html[Groovy DSL^] and the link:{kotlinDslPath}/index.html[Kotlin DSL^] are the only accepted languages for Gradle scripts.
-
-Let's take a look at an example and break it down:
+* allowed languages
+    ** Groovy -- `build.gradle` --
+        *** Check link:{groovyDslPath}/index.html[Groovy DSL^]
+    ** Kotlin -- `build.gradle.kts` --
+        *** Check link:{kotlinDslPath}/index.html[Kotlin DSL^]
+* _Example:_
 
 ====
 [.multi-language-sample]
@@ -42,15 +39,14 @@ Let's take a look at an example and break it down:
 [source,kotlin]
 ----
 plugins {
-    id("application")               // <1>
+    id("application")               // <1> Add plugins
+    // facilitates creating an executable JVM application
 }
 
 application {
-    mainClass = "com.example.Main"  // <2>
+    mainClass = "com.example.Main"  // <2> convention properties
 }
 ----
-<1> Add plugins.
-<2> Use convention properties.
 =====
 
 [.multi-language-sample]
@@ -59,42 +55,28 @@ application {
 [source,groovy]
 ----
 plugins {
-    id 'application'                // <1>
+    id 'application'                // <1> Add plugins
+    // facilitates creating an executable JVM application
 }
 
 application {
-    mainClass = 'com.example.Main'  // <2>
+    mainClass = 'com.example.Main'  // <2> convention properties
 }
 ----
-<1> Add plugins.
-<2> Use convention properties.
 =====
 ====
 
 === 1. Add plugins
-Plugins extend Gradle's functionality and can contribute tasks to a project.
-
-Adding a plugin to a build is called _applying_ a plugin and makes additional functionality available.
-
-[source,kotlin]
-----
-plugins {
-    id("application")
-}
-----
-
-The `application` plugin facilitates creating an executable JVM application.
-
-Applying the <<application_plugin.adoc#application_plugin,Application plugin>> also implicitly applies the <<java_plugin.adoc#java_plugin,Java plugin>>.
-The `java` plugin adds Java compilation along with testing and bundling capabilities to a project.
+* allows
+    ** extending Gradle's functionality
+    ** contributing tasks to a project
+        *** _Examples:_ adding tasks, add properties & methods | project
+* named also: _applying_ a plugin
+* _Example:_
+    ** <<application_plugin.adoc#application_plugin,Application plugin>>
 
 === 2. Use convention properties
-A plugin adds tasks to a project.
-It also adds properties and methods to a project.
-
-The `application` plugin defines tasks that package and distribute an application, such as the `run` task.
-
-The Application plugin provides a way to declare the main class of a Java application, which is required to execute the code.
+* _Example:_ Application plugin -- provides a way to declare the -- main class of a Java application
 
 [source,kotlin]
 ----
@@ -103,9 +85,7 @@ application {
 }
 ----
 
-In this example, the main class (i.e., the point where the program's execution begins) is `com.example.Main`.
-
-Consult the <<writing_build_scripts.adoc#writing_build_scripts,Writing Build Scripts>> page to learn more.
+* Check <<writing_build_scripts.adoc#writing_build_scripts,Writing Build Scripts>>
 
 [.text-right]
 **Next Step:** <<dependency_management_basics.adoc#dependency_management_basics,Learn about Dependency Management>> >>
