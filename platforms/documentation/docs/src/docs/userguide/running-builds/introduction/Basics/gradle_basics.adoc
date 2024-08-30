@@ -82,7 +82,7 @@ project
 <2> Gradle version catalog for dependency management
 <3> Gradle wrapper scripts
 <4> Gradle settings file / define root project + subprojects
-<5> Gradle build scripts of subprojects
+<5> Gradle build scripts
 <6> Source code and/or additional files for the projects
 
 * presence of `gradlew` and `gradlew.bat` | root directory of a project -> indicator that Gradle is used
