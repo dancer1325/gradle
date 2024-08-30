@@ -15,20 +15,20 @@
 [[compatibility]]
 = Compatibility Matrix
 
-The sections below describe Gradle's compatibility with several integrations.
-Versions not listed here may or may not work.
+* Gradle's compatibility -- with -- several integrations
+    ** versions / NOT listed -> may or may not work
 
 == Java
-A Java version between 8 and 21 is required to execute Gradle.
-Java 22 and later versions are not yet supported.
-
-Java 6 and 7 can be used for <<building_java_projects.adoc#sec:java_cross_compilation,compilation>> but are deprecated for use with testing. Testing with Java 6 and 7 will not be supported in Gradle 9.0.
-
-Any fully supported version of Java can be used for compilation or testing.
-However, the latest Java version may only be supported for compilation or testing, not for running Gradle.
-Support is achieved using <<toolchains#toolchains,toolchains>> and applies to all tasks supporting toolchains.
-
-See the table below for the Java version supported by a specific Gradle release:
+* v[8, 21]
+    ** valid for
+        *** compiling
+        *** testing
+        *** maybe NOT running Gradle | latest Java versions
+* v22+ NOT yet supported
+* v6 and v7, valid for
+    ** <<building_java_projects.adoc#sec:java_cross_compilation,compilation>>
+    ** testing -- will be deprecated from -- Gradle 9.0+
+* support -- is achieved via -- <<toolchains#toolchains,toolchains>>
 
 .Java Compatibility
 |===
@@ -55,8 +55,10 @@ See the table below for the Java version supported by a specific Gradle release:
 [[kotlin]]
 == Kotlin
 
-Gradle is tested with Kotlin 1.6.10 through 2.0.0-RC1.
-Beta and RC versions may or may not work.
+* Gradle -- is tested with -- Kotlin [1.6.10, 2.0.0-RC1]
+    ** may or may not work
+        *** Beta
+        *** RC
 
 .Embedded Kotlin version
 |===
@@ -89,11 +91,14 @@ Beta and RC versions may or may not work.
 |===
 
 == Groovy
-Gradle is tested with Groovy 1.5.8 through 4.0.0.
 
-Gradle plugins written in Groovy must use Groovy 3.x for compatibility with Gradle and Groovy DSL build scripts.
+* Gradle -- is tested with -- Groovy [1.5.8, 4.0.0]
+* Gradle plugins / written in Groovy -> require Groovy 3.x
+    ** Reason: 🧠 compatibility with Gradle and Groovy DSL build scripts 🧠
 
 == Android
 
-Gradle is tested with Android Gradle Plugin 7.3 through 8.3.
-Alpha and beta versions may or may not work.
+* Gradle -- is tested with -- Android Gradle Plugin [7.3, 8.3]
+    ** may or may not work
+        *** Alpha
+        *** beta
