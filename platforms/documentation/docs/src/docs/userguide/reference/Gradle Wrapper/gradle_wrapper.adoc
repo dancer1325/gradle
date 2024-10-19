@@ -39,43 +39,53 @@ The following sections explain each of these use cases in more detail.
 [[sec:adding_wrapper]]
 == Adding the Gradle Wrapper
 
-Generating the Wrapper files requires an installed version of the Gradle runtime on your machine as described in <<installation.adoc#installation,Installation>>.
-Thankfully, generating the initial Wrapper files is a one-time process.
+* requirements
+    ** install Gradle runtime | your machine
+        *** <<installation.adoc#installation,Installation>>
+* 👀 `wrapper` task built-in / EVERY "build.gradle" 👀
+    ** | group "Build Setup tasks"
+    ** <<command_line_interface.adoc#sec:listing_tasks,listing the tasks>>
+    ** ⭐️if you execute -> generates the necessary Wrapper files | project directory ⭐️
 
-Every vanilla Gradle build comes with a built-in task called `wrapper`.
-The task is listed under the group "Build Setup tasks" when <<command_line_interface.adoc#sec:listing_tasks,listing the tasks>>.
+        ----
+        $ gradle wrapper
+        ----
+        ----
+        include::{snippetsPath}/wrapper/simple/tests/wrapperCommandLine.out[]
+        ----
 
-Executing the `wrapper` task generates the necessary Wrapper files in the project directory:
+* recommendations
+    ** track -- through -- version control
+        *** ALTHOUGH, SOME organizations do NOT allow it
+* Wrapper files
+    ** + .jar file
+        *** are small
+* `gradle/wrapper/gradle-wrapper.properties`
+    ** generated Wrapper properties file
+    ** allows
+        *** storing the information -- as --
+            **** *server hosting* of the Gradle distribution
+            **** *type of Gradle distribution*
+                ***** by default, the `-bin` distribution -- contains --
+                    ****** ONLY the runtime
+                    ****** NO sample code & documentation
+            **** *Gradle version*
+                ***** execute the build
+                ***** == Gradle version / used -- via -- `wrapper` task -- to generate the -- Wrapper files
+            **** *timeout*
+                ***** optionally, in ms
+                ***** uses
+                    ****** download the Gradle distribution
+            **** *validation of the distribution* URL
+                ***** optional
+                ***** *boolean*
 
-----
-$ gradle wrapper
-----
-----
-include::{snippetsPath}/wrapper/simple/tests/wrapperCommandLine.out[]
-----
+    [source,properties,subs=+attributes]
+    ----
+    distributionUrl=https\://services.gradle.org/distributions/gradle-{gradleVersion}-bin.zip
+    ----
 
-[TIP]
-====
-To make the Wrapper files available to other developers and execution environments, you need to check them into version control.
-Wrapper files, including the JAR file, are small.
-Adding the JAR file to version control is expected.
-Some organizations do not allow projects to submit binary files to version control, and there is no workaround available.
-====
-
-The generated Wrapper properties file, `gradle/wrapper/gradle-wrapper.properties`, stores the information about the Gradle distribution:
-
-* The *server hosting* the Gradle distribution.
-* The *type of Gradle distribution*. By default, the `-bin` distribution contains only the runtime but no sample code and documentation.
-* The *Gradle version* used for executing the build. By default, the `wrapper` task picks the same Gradle version used to generate the Wrapper files.
-* Optionally, a *timeout* in ms used when downloading the Gradle distribution.
-* Optionally, a *boolean* to set the *validation of the distribution* URL.
-
-The following is an example of the generated distribution URL in `gradle/wrapper/gradle-wrapper.properties`:
-[source,properties,subs=+attributes]
-----
-distributionUrl=https\://services.gradle.org/distributions/gradle-{gradleVersion}-bin.zip
-----
-
+* TODO:
 All of those aspects are configurable at the time of generating the Wrapper files with the help of the following command line options:
 
 `--gradle-version`::
