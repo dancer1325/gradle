@@ -303,20 +303,30 @@ You also get a project report within https://scans.gradle.com/[Build Scans].
 
 [[sec:listing_tasks]]
 === Listing tasks
-Running `gradle tasks` gives you a list of the main tasks of the selected project. This report shows the default tasks for the project, if any, and a description for each task:
 
-----
-$ gradle tasks
-----
+* `gradle tasks`
+    ** list 👀 ONLY the main tasks 👀 & description about it | selected project
+        *** main == tasks / -- assigned to a -- task group
+    ** `--all`
+        *** obtain MORE information
+    ** `--no-all`
+        *** report tasks / -- assigned to a -- task group
+    ** `--group groupTaskNameToFilter`
+        *** ONLY display the tasks / -- from a -- specific group
 
-By default, this report shows only those tasks assigned to a task group.
-
-Groups (such as verification, publishing, help, build...) are available as the header of each section when listing tasks:
+* task group
+    ** types
+        *** verification
+        *** publishing
+        *** help
+        *** build
+        *** ...
+    ** if you list the tasks -> header of each section
 
 ----
 > Task :tasks
 
-Build tasks
+Build tasks             # Task group
 -----------
 assemble - Assembles the outputs of this project.
 
@@ -324,33 +334,19 @@ Build Setup tasks
 -----------------
 init - Initializes a new Gradle build.
 
-Distribution tasks
+Distribution tasks      # Task group
 ------------------
 assembleDist - Assembles the main distributions
 
-Documentation tasks
+Documentation tasks     # Task group
 -------------------
 javadoc - Generates Javadoc API documentation for the main source code.
 ----
 
-You can obtain more information in the task listing using the `--all` option:
-
-----
-$ gradle tasks --all
-----
-
-The option `--no-all` can limit the report to tasks assigned to a task group.
-
-If you need to be more precise, you can display only the tasks from a specific group using the `--group` option:
-
-----
-$ gradle tasks --group="build setup"
-----
-
-
-
 [[sec:show_task_details]]
 === Show task usage details
+
+* TODO:
 Running `gradle help --task someTask` gives you detailed information about a specific task:
 
 ----
