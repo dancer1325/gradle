@@ -15,37 +15,35 @@
 [[writing_settings_files]]
 = Writing Settings Files
 
-The settings file is the entry point of every Gradle build.
-
 image::author-gradle-7.png[]
 
-Early in the Gradle Build lifecycle, the <<build_lifecycle.adoc#sec:initialization,initialization phase>> finds the settings file in your <<directory_layout#dir:project_root,project root directory>>.
-
-When the settings file `settings.gradle(.kts)` is found, Gradle instantiates a link:{groovyDslPath}/org.gradle.api.initialization.Settings.html[`Settings`] object.
-
-One of the purposes of the `Settings` object is to allow you to declare all the projects to be included in the build.
+* <<build_lifecycle.adoc#sec:initialization,initialization phase>>
+    ** first phases | build lifecycle
+    ** requirements
+        *** place | <<directory_layout#dir:project_root,project root directory>>
+    ** once `settings.gradle(.kts)` is found -> Gradle instantiates a link:{groovyDslPath}/org.gradle.api.initialization.Settings.html[`Settings`] object
+* `Settings` object
+    ** uses
+        *** declare ALL the projects / -- be included in the -- build
 
 [[sec:settings_script]]
 == Settings Scripts
 
-The settings script is either a `settings.gradle` file in Groovy or a `settings.gradle.kts` file in Kotlin.
-
-Before Gradle assembles the projects for a build, it creates a `Settings` instance and executes the settings file against it.
+* == `settings.gradle` or `settings.gradle.kts`
 
 image::author-gradle-3.png[Settings,500,63,align="left"]
 
-As the settings script executes, it configures this `Settings`.
-Therefore, the _settings file_ defines the `Settings` object.
-
-IMPORTANT: There is a one-to-one correspondence between a `Settings` instance and a `settings.gradle(.kts)` file.
+* `Settings()`
+    ** == settings script
+    ** once it's executed -> `Settings` is configured
 
 == The `Settings` Object
 
-The `Settings` object is part of the link:{javadocPath}/org/gradle/api/initialization/Settings.html[Gradle API].
-
-- In the Groovy DSL, the `Settings` object documentation is found link:{groovyDslPath}/org.gradle.api.initialization.Settings.html[here].
-- In the Kotlin DSL, the `Settings` object documentation is found link:{kotlinDslPath}/gradle/org.gradle.api.initialization/-settings/index.html[here].
-
+* 1to1 between `settings.gradle(.kts)` -- & -- `Settings` instance
+* == part of the link:{javadocPath}/org/gradle/api/initialization/Settings.html[Gradle API]
+    ** | Groovy DSL, link:{groovyDslPath}/org.gradle.api.initialization.Settings.html[`Settings` object documentation]
+    ** | Kotlin DSL, link:{kotlinDslPath}/gradle/org.gradle.api.initialization/-settings/index.html[`Settings` object documentation]
+* TODO:
 Many top-level properties and blocks in a settings script are part of the Settings API.
 
 For example, we can set the root project name in the settings script using the `Settings.rootProject` property:
