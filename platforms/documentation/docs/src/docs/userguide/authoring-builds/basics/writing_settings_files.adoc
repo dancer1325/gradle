@@ -43,51 +43,44 @@ image::author-gradle-3.png[Settings,500,63,align="left"]
 * == part of the link:{javadocPath}/org/gradle/api/initialization/Settings.html[Gradle API]
     ** | Groovy DSL, link:{groovyDslPath}/org.gradle.api.initialization.Settings.html[`Settings` object documentation]
     ** | Kotlin DSL, link:{kotlinDslPath}/gradle/org.gradle.api.initialization/-settings/index.html[`Settings` object documentation]
-* TODO:
-Many top-level properties and blocks in a settings script are part of the Settings API.
-
-For example, we can set the root project name in the settings script using the `Settings.rootProject` property:
+* 👀top-level properties & blocks | settings script -- are part of the -- Settings API 👀
+* set the root project name
 
 [source,kotlin]
 ----
 settings.rootProject.name = "root"
-----
 
-Which is usually shortened to:
-
-[source,kotlin]
-----
+// way to shorten
 rootProject.name = "root"
 ----
 
 [[sec:standard_settings_properties]]
 === Standard `Settings` properties
 
-The `Settings` object exposes a standard set of properties in your settings script.
-
-The following table lists a few commonly used properties:
 
 [%autowidth.stretch]
 |===
 | Name | Description
 
 | `buildCache`
-| The build cache configuration.
+| build cache configuration
 
 | `plugins`
-| The container of plugins that have been applied to the settings.
+| container of plugins / -- have been applied to the -- settings
 
 | `rootDir`
-| The root directory of the build. The root directory is the project directory of the root project.
+| root directory of the build
+
+== project directory of the root project
 
 | `rootProject`
-| The root project of the build.
+| root project of the build
 
 | `settings`
 | Returns this settings object.
 |===
 
-The following table lists a few commonly used methods:
+* common methods
 
 [%autowidth.stretch]
 |===
@@ -102,6 +95,7 @@ The following table lists a few commonly used methods:
 
 == Settings Script structure
 
+* TODO:
 A Settings script is a series of method calls to the Gradle API that often use `{ ... }`, a special shortcut in both the Groovy and Kotlin languages.
 A `{ }` block is called a _lambda_ in Kotlin or a _closure_ in Groovy.
 
