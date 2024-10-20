@@ -15,66 +15,68 @@
 [[writing_build_scripts]]
 = Writing Build Scripts
 
-* build lifecycle
-    ** <<writing_settings_files.adoc#writing_settings_files,Initialization Phase>>
-    ** TODO:
-* build script file
-    ** / EACH project | settings file Gradle creates a link:{javadocPath}org/gradle/api/Project.html[`Project`] instance.
-
-Gradle then looks for a corresponding build script file, which is used in the configuration phase.
+* check <<build_lifecycle.adoc#sec:build_phases,build lifecycle>>
+* build script files -- build.gradle(.kts) --
+    ** used | configuration phase
 
 == Build Scripts
 
-Every Gradle build comprises one or more *projects*; a _root_ project and _subprojects_.
-
-A project typically corresponds to a software component that needs to be built, like a library or an application.
-It might represent a library JAR, a web application, or a distribution ZIP assembled from the JARs produced by other projects.
-
-On the other hand, it might represent a thing to be done, such as deploying your application to staging or production environments.
-
-Gradle scripts are written in either Groovy DSL or Kotlin DSL (domain-specific language).
-
-A *build script* configures a *project* and is associated with an object of type link:{javadocPath}/org/gradle/api/Project.html[`Project`].
+* project
+    ** == software component / needs to be built OR thing to be done
+        *** _Examples:_
+            **** as software component -- library, application, ... --
+            **** as thing to be done --  deploying your application | staging or production environments, ... --
+* Gradle scripts are written |
+    ** Groovy DSL OR
+    ** Kotlin DSL (domain-specific language)
+* *build script*
+    ** == file
+        *** `\*.gradle` | Groovy
+        *** `*.gradle.kts` | Kotlin
+    ** -- configures a -- *project* & project's children /
+        *** -- is associated with an -- object of type link:{javadocPath}/org/gradle/api/Project.html[`Project`]
 
 image::author-gradle-4.png[Build,500,63,align="left"]
 
-As the build script executes, it configures `Project`.
-
-The build script is either a `\*.gradle` file in Groovy or a `*.gradle.kts` file in Kotlin.
-
-IMPORTANT: _Build scripts_ configure `Project` objects and their children.
-
 == The `Project` object
 
-The `Project` object is part of the link:{javadocPath}/org/gradle/api/Project.html[Gradle API]:
-
-- In the Groovy DSL, the `Project` object documentation is found link:{groovyDslPath}/org.gradle.api.Project.html[here].
-- In the Kotlin DSL, the `Project` object documentation is found link:{kotlinDslPath}/gradle/org.gradle.api/-project/index.html[here].
-
-Many top-level properties and blocks in a build script are part of the Project API.
-
-For example, the following build script uses the link:{groovyDslPath}/org.gradle.api.Project.html#org.gradle.api.Project:name[Project.name] property to print the name of the project:
+* part of the link:{javadocPath}/org/gradle/api/Project.html[Gradle API]
+    ** link:{groovyDslPath}/org.gradle.api.Project.html[`Project`] | Groovy DSL
+    ** link:{kotlinDslPath}/gradle/org.gradle.api/-project/index.html[`Project`] | Kotlin DSL
+* 👀MANY top-level properties & blocks | build script -- are part of the -- Project API 👀
+    ** _Example:_ link:{groovyDslPath}/org.gradle.api.Project.html#org.gradle.api.Project:name[Project.name] property
 
 ====
+// 1. Kotlin
+// TODO: Configure properly
+////
 include::sample[dir="snippets/tutorial/projectApi/kotlin",files="build.gradle.kts[tags=project-name]"]
-include::sample[dir="snippets/tutorial/projectApi/groovy",files="build.gradle[tags=project-name]"]
+////
+include::../../../../snippets/tutorial/projectApi/kotlin/build.gradle.kts[tags=project-name]
 ----
 $ gradle -q check
 include::{snippetsPath}/tutorial/projectApi/tests/projectApi.out[]
 ----
 ====
 
-Both `println` statements print out the same property.
+====
+// 2. Groovy
+// TODO: Configure properly
+////
+include::sample[dir="snippets/tutorial/projectApi/groovy",files="build.gradle[tags=project-name]"]
+////
 
-The first uses the top-level reference to the `name` property of the `Project` object.
-The second statement uses the `project` property available to any build script, which returns the associated `Project` object.
+include::../../../../snippets/tutorial/projectApi/groovy/build.gradle[tags=project-name]
+----
+$ gradle -q check
+include::{snippetsPath}/tutorial/projectApi/tests/projectApi.out[]
+----
+====
 
 [[sec:standard_project_properties]]
 === Standard project properties
 
-The `Project` object exposes a standard set of properties in your build script.
-
-The following table lists a few commonly used properties:
+* `Project` object's properties (commonly used) / exposed | your build script
 
 [%header%autowidth,compact]
 |===
@@ -82,23 +84,23 @@ The following table lists a few commonly used properties:
 
 | `name`
 | `String`
-| The name of the project directory.
+| name of the project directory
 
 | `path`
 | `String`
-| The fully qualified name of the project.
+| fully qualified name of the project
 
 | `description`
 | `String`
-| A description for the project.
+| description for the project
 
 | `dependencies`
 | `DependencyHandler`
-| Returns the dependency handler of the project.
+| Returns the project's dependency handler
 
 | `repositories`
 | `RepositoryHandler`
-| Returns the repository handler of the project.
+| Returns the project's repository handler
 
 | `layout`
 | `ProjectLayout`
@@ -113,80 +115,74 @@ The following table lists a few commonly used properties:
 | The version of this project.
 |===
 
-The following table lists a few commonly used methods:
+* `Project` object's methods (commonly used)
 
 [%autowidth.stretch]
 |===
 | Name | Description
 
 | `uri()`
-| Resolves a file path to a URI, relative to the project directory of this project.
+| relative file path -- is resolved to a -- URI
 
 | `task()`
-| Creates a Task with the given name and adds it to this project.
+| Creates a Task / given name & adds it to this project
 |===
 
 == Build Script structure
 
-The Build script is composed of `{ ... }`, a special object in both Groovy and Kotlin.
-This object is called a _lambda_ in Kotlin or a _closure_ in Groovy.
+* == 👀<<writing_settings_files.adoc#_settings_script_structure,Settings Script structure>> 👀
+* Build Script
+    ** == 👀series of method calls -- to the -- Gradle API 👀 /
+        *** built | DSLs
+        *** `{ ... }` block
+            **** method calls / -- are mapped to -- Gradle API methods
+            **** naming
+                ***** _lambda_ | Kotlin or
+                ***** _closure_ | Groovy
+    ** executed line by line, top -- to -> bottom
+* `plugins{ }`
+    ** == block / it's a method invocation
+    ** == short form for
 
-Simply put, the `plugins{ }` block is a method invocation in which a Kotlin _lambda_ object or Groovy _closure_ object is passed as the argument.
-It is the short form for:
+        [source,kotlin]
+        ----
+        plugins(function() {
+            id("plugin")
+        })
+        ----
 
-[source]
-----
-plugins(function() {
-    id("plugin")
-})
-----
-
-Blocks are mapped to Gradle API methods.
-
-The code inside the function is executed against a `this` object called a _receiver_ in Kotlin lambda and a _delegate_ in Groovy closure.
-Gradle determines the correct `this` object and invokes the correct corresponding method.
-The `this` of the method invocation `id("plugin")` object is of type link:{javadocPath}/org/gradle/plugin/use/PluginDependenciesSpec.html[`PluginDependenciesSpec`].
-
-The build script is essentially composed of Gradle API calls built on top of the DSLs.
-Gradle executes the script line by line, top to bottom.
-
-Let's take a look at an example and break it down:
-
+    ** `this` -- of the method invocation `id("plugin")` object -- is of type link:{javadocPath}/org/gradle/plugin/use/PluginDependenciesSpec.html[`PluginDependenciesSpec`]
+* _Example:_
 ====
 [.multi-language-sample]
 =====
 .build.gradle.kts
 [source,kotlin]
 ----
-plugins {                                                               // <1>
+plugins {                                                               // Apply plugins | build
     id("org.jetbrains.kotlin.jvm") version "1.9.0"
     id("application")
 }
 
-repositories {                                                          // <2>
+repositories {                                                          // define locations of plugins
     mavenCentral()
 }
 
-dependencies {                                                          // <3>
+dependencies {                                                          // add dependencies
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.3")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("com.google.guava:guava:32.1.1-jre")
 }
 
-application {                                                           // <4>
+application {                                                           // Set properties
     mainClass = "com.example.Main"
 }
 
-tasks.named<Test>("test") {                                             // <5>
+tasks.named<Test>("test") {                                             // Register and configure tasks
     useJUnitPlatform()
 }
 ----
-<1> Apply plugins to the build.
-<2> Define the locations where dependencies can be found.
-<3> Add dependencies.
-<4> Set properties.
-<5> Register and configure tasks.
 =====
 
 [.multi-language-sample]
@@ -194,39 +190,35 @@ tasks.named<Test>("test") {                                             // <5>
 .build.gradle
 [source,groovy]
 ----
-plugins {                                                               // <1>
+plugins {                                                               // Apply plugins | build
     id 'org.jetbrains.kotlin.jvm' version '1.9.0'
     id 'application'
 }
 
-repositories {                                                          // <2>
+repositories {                                                          // define locations of plugins
     mavenCentral()
 }
 
-dependencies {                                                          // <3>
+dependencies {                                                          // add dependencies
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'com.google.guava:guava:32.1.1-jre'
 }
 
-application {                                                           // <4>
+application {                                                           // Set properties
     mainClass = 'com.example.Main'
 }
 
-tasks.named('test') {                                                   // <5>
+tasks.named('test') {                                                   // Register and configure tasks
     useJUnitPlatform()
 }
 ----
-<1> Apply plugins to the build.
-<2> Define the locations where dependencies can be found.
-<3> Add dependencies.
-<4> Set properties.
-<5> Register and configure tasks.
 =====
 ====
 
 === 1. Apply plugins to the build
+* TODO:
 Plugins are used to extend Gradle. They are also used to modularize and reuse project configurations.
 
 Plugins can be applied using the `PluginDependenciesSpec` plugins script block.
