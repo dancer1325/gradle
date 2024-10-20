@@ -21,7 +21,7 @@ image::author-gradle-7.png[]
     ** first phases | build lifecycle
     ** requirements
         *** place | <<directory_layout#dir:project_root,project root directory>>
-    ** once `settings.gradle(.kts)` is found -> Gradle instantiates a link:{groovyDslPath}/org.gradle.api.initialization.Settings.html[`Settings`] object
+    ** 👀 once `settings.gradle(.kts)` is found -> Gradle instantiates a link:{groovyDslPath}/org.gradle.api.initialization.Settings.html[`Settings`] object 👀
 * `Settings` object
     ** uses
         *** declare ALL the projects / -- be included in the -- build
