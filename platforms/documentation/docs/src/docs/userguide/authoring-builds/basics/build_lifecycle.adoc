@@ -74,7 +74,9 @@ image::build-lifecycle-example.png[]
 include::../../../../snippets/buildlifecycle/basic/kotlin/settings.gradle.kts[]
 // 1.2 build.gradle.kts
 include::../../../../snippets/buildlifecycle/basic/kotlin/build.gradle.kts[]
+====
 
+====
 // 2. Groovy
 // 2.1 settings.gradle
 include::../../../../snippets/buildlifecycle/basic/groovy/settings.gradle[]
@@ -82,18 +84,19 @@ include::../../../../snippets/buildlifecycle/basic/groovy/settings.gradle[]
 include::../../../../snippets/buildlifecycle/basic/groovy/build.gradle[]
 ====
 
-The following command executes the `test` and `testBoth` tasks specified above.
-Because Gradle only configures requested tasks and their dependencies, the `configured` task never configures:
+* if you want to execute the `test` and `testBoth` tasks
+    ** `configured` task never configures ❓
+        *** Reason: 🧠Gradle ONLY configures requested tasks & their dependencies🧠
 
 [source.multi-language-sample,kotlin]
 ----
 > gradle test testBoth
-include::{snippetsPath}/buildlifecycle/basic/tests/buildlifecycle.out[]
+include::../../../../snippets/buildlifecycle/basic/tests/buildlifecycle.out[]
 ----
 [source.multi-language-sample,groovy]
 ----
 > gradle test testBoth
-include::{snippetsPath}/buildlifecycle/basic/tests/buildlifecycle.out[]
+include::../../../../snippets/buildlifecycle/basic/tests/buildlifecycle.out[]
 ----
 
 
