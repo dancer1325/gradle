@@ -278,11 +278,16 @@ Guava provides utility methods for collections, caching, primitives support, con
 
 === 4. Set properties
 
-A plugin can add properties and methods to a project using extensions.
-
-The link:{groovyDslPath}/org.gradle.api.Project.html[`Project`] object has an associated link:{javadocPath}/org/gradle/api/plugins/ExtensionContainer.html[`ExtensionContainer`] object that contains all the settings and properties for the plugins that have been applied to the project.
-
-In the example, the `application` plugin added an `application` property, which is used to detail the main class of our Java application:
+* extensions
+    ** allows
+        *** plugin -- can add -- | project
+            **** properties
+            **** methods
+* link:{javadocPath}/org/gradle/api/plugins/ExtensionContainer.html[`ExtensionContainer`]
+    ** == object / -- associated to -- link:{groovyDslPath}/org.gradle.api.Project.html[`Project`] / contains ALL
+        *** plugin's settings / -- have been applied to the -- project
+        *** plugin's properties / -- have been applied to the -- project
+* _Example:_ `application` plugin -- adds an -- `application` property / -- used to detail the -- main class of our Java application
 
 [source]
 ----
