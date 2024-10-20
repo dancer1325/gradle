@@ -15,11 +15,11 @@
 [[writing_build_scripts]]
 = Writing Build Scripts
 
-The initialization phase in the Gradle Build lifecycle finds the root project and subprojects included in your <<directory_layout#dir:project_root,project root directory>> using the settings file.
-
-image::author-gradle-6.png[]
-
-Then, for each project included in the settings file, Gradle creates a link:{javadocPath}org/gradle/api/Project.html[`Project`] instance.
+* build lifecycle
+    ** <<writing_settings_files.adoc#writing_settings_files,Initialization Phase>>
+    ** TODO:
+* build script file
+    ** / EACH project | settings file Gradle creates a link:{javadocPath}org/gradle/api/Project.html[`Project`] instance.
 
 Gradle then looks for a corresponding build script file, which is used in the configuration phase.
 
