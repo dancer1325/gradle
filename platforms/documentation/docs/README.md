@@ -289,3 +289,8 @@ The output is available within `build/javadoc`.
 There is a convenience task to build all of the documentation:
 
     ./gradlew :docs:docs
+
+## Notes
+* ".asciidoctorconfig"
+  * TODO: configure properly
+  * [follow](https://github.com/asciidoctor/asciidoctor-intellij-plugin/issues/1712#issuecomment-2424951033) 

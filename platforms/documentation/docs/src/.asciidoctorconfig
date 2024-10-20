@@ -1,0 +1,7 @@
+// essential for the SampleIncludeProcessor to work
+:samples-dir: {asciidoctorconfigdir}
+
+// additional Gradle-specific attributes to show images and render links
+:snippetsPath: {asciidoctorconfigdir}/snippets
+:imagesdir: {asciidoctorconfigdir}/docs/userguide/img
+:groovyDslPath: https://docs.gradle.org/current/dsl
