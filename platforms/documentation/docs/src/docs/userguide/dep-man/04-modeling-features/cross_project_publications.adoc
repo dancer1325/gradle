@@ -15,13 +15,15 @@
 [[cross_project_publications]]
 = Sharing outputs between projects
 
-A common pattern, in multi-project builds, is that one project consumes the artifacts of another project.
-In general, the simplest consumption form in the Java ecosystem is that when `A` depends on `B`, then `A` would depend on the `jar` produced by project `B`.
-As previously described in this chapter, this is modeled by `A` depending on a _variant of_ `B`, where the variant is selected based on the needs of `A`.
-For compilation, we need the API dependencies of `B`, provided by the `apiElements` variant.
-For runtime, we need the runtime dependencies of `B`, provided by the `runtimeElements` variant.
-
-However, what if you need a _different_ artifact than the main one?
+* scenario
+    ** multi-project builds / one project -- consumes the -- another project's artifacts
+    ** simplest one: `A` -- depends on -- `B`
+        *** _Example:_ | Java ecosystem, == `A` -- would depend on the  --`jar` / -- produced by -- `B`
+        *** == `A` -- depend on a -- _variant of_ `B`
+        *** requirements
+            **** for compilation, API dependencies of `B` / -- provided by the -- `apiElements`
+            **** for runtime, runtime dependencies of `B` / -- provided by the -- `runtimeElements`
+* TODO:
 Gradle provides, for example, built-in support for depending on the <<java_testing.adoc#sec:java_test_fixtures,test fixtures>> of another project, but sometimes the artifact you need to depend on simply isn't exposed as a variant.
 
 In order to be _safe to share_ between projects and allow maximum performance (parallelism), such artifacts must be exposed via _outgoing configurations_.
