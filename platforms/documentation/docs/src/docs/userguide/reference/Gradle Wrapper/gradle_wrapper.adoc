@@ -15,7 +15,7 @@
 [[gradle_wrapper_reference]]
 = Gradle Wrapper Reference
 
-The **recommended way to execute any Gradle build** is with the help of the Gradle Wrapper (referred to as "Wrapper").
+* **recommended way to execute any Gradle build**
 
 The Wrapper is a script that invokes a declared version of Gradle, downloading it beforehand if necessary.
 As a result, developers can get up and running with a Gradle project quickly.
@@ -218,39 +218,41 @@ NOTE: The Wrapper shell script and batch file reside in the root directory of a 
 [[sec:upgrading_wrapper]]
 == Upgrading the Gradle Wrapper
 
-Projects typically want to keep up with the times and upgrade their Gradle version to benefit from new features and improvements.
+* if you upgrade the Gradle version -> benefit from
+    ** NEW features
+    ** NEW improvements
 
-One way to upgrade the Gradle version is by manually changing the `distributionUrl` property in the Wrapper's `gradle-wrapper.properties` file.
+* Wrapper files MUST be tracked
 
-The better and recommended option is to run the `wrapper` task and provide the target Gradle version as described in <<#sec:adding_wrapper,Adding the Gradle Wrapper>>.
-Using the `wrapper` task ensures that any optimizations made to the Wrapper shell script or batch file with that specific Gradle version are applied to the project.
-
-As usual, you should commit the changes to the Wrapper files to version control.
-
-Note that running the wrapper task once will update `gradle-wrapper.properties` only, but leave the wrapper itself in `gradle-wrapper.jar` untouched.
-This is usually fine as new versions of Gradle can be run even with older wrapper files.
-
-NOTE: If you want *all* the wrapper files to be completely up-to-date, you will need to run the `wrapper` task a second time.
-
-The following command upgrades the Wrapper to the `latest` version:
-
+* ways to upgrade the Gradle version
+    ** manually changing Wrapper's `gradle-wrapper.properties` 's `distributionUrl` property
+    ** run the `wrapper` task / provide the target Gradle version
+        *** 👀recommended one 👀
+            **** Reason: 🧠 any optimizations are applied | project 🧠
+        *** see <<#sec:adding_wrapper,Adding the Gradle Wrapper>>
+        *** if you run 1! ->
+            **** update `gradle-wrapper.properties`
+            **** NOT change `gradle-wrapper.jar` | wrapper
+        *** if you run 2 -> ALL wrapper files are completely up-to-date
+        *** if you run 3 -> download the Gradle distribution binaries & update the `gradlew` and `gradlew.bat` files
+        *** _Example1:_ upgrades the Wrapper -- to the -- `latest` version
++
 [listing,subs=+attributes]
 ----
 $ ./gradlew wrapper --gradle-version latest
 include::{snippetsPath}/wrapper/simple/tests/wrapperGradleVersionUpgrade.out[]
 ----
 
-The following command upgrades the Wrapper to a specific version:
-
+        *** _Example2:_ upgrades the Wrapper -- to the -- specific version
++
 [listing,subs=+attributes]
 ----
 $ ./gradlew wrapper --gradle-version {gradleVersion}
 include::{snippetsPath}/wrapper/simple/tests/wrapperGradleVersionUpgrade.out[]
 ----
 
-Once you have upgraded the wrapper, you can check that it's the version you expected by executing `./gradlew --version`.
-
-Don't forget to run the `wrapper` task again to download the Gradle distribution binaries (if needed) and update the `gradlew` and `gradlew.bat` files.
+* `./gradlew --version`
+    ** check gradle has the expected version
 
 [[customizing_wrapper]]
 == Customizing the Gradle Wrapper
